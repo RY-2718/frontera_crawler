@@ -1,0 +1,10 @@
+- twisted/names/client.pyで以下のメソッドを書き換え，定義
+    + getHostByName
+    + getHostByNameV4
+    + getHostByNameV6Address
+    + getHostByName6
+- twisted/names/common.pyで以下のメソッドを書き換え，定義
+    + getHostByName
+    + getHostByNameV4
+    + getHostByNameV6Address
+    + getHostByName6
