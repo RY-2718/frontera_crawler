@@ -21,7 +21,7 @@ if [ $num -ne 0 ]; then
     echo "mv urls/urls.log.* to urls/archive/"
     cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/....-..-.. ..:..:..,... \([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
     gzip urls/urls.log.*
-    mv *.gz $f
+    mv urls/*.gz urls/archive/
 fi
 
 while : 
@@ -48,6 +48,6 @@ do
         echo "mv urls/urls.log.* to urls/archive/"
         cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/....-..-.. ..:..:..,... \([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
         gzip urls/urls.log.*
-        mv *.gz $f
+        mv urls/*.gz urls/archive/
     fi
 done
