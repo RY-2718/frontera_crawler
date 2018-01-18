@@ -28,10 +28,10 @@ SPIDER_MIDDLEWARES.update({
 })
 
 DOWNLOADER_MIDDLEWARES.update({
-    #'crawler.middlewares.DenyBlacklistDomainMiddleware': 2,
-    #'crawler.middlewares.ReturnQueryURLMiddleware': 2,
-    'crawler.middlewares.DownloadTooMuchAtOnceCheckerMiddleware': 3,
     'crawler.middlewares.IPCheckerMiddleware': 1,
+    #'crawler.middlewares.DenyBlacklistDomainMiddleware': 2,
+    #'crawler.middlewares.ReturnQueryURLMiddleware': 3,
+    'crawler.middlewares.DownloadTooMuchAtOnceCheckerMiddleware': 4,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
     'frontera.contrib.scrapy.middlewares.schedulers.SchedulerDownloaderMiddleware': 1000,
 })

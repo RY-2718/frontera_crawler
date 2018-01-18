@@ -85,9 +85,8 @@ class IPCheckerMiddleware(object):
                             self.already_logged_set.add(address)
                             print("IP too dupricated: %s, %s" % (hostname, address))
                             ip_logger.debug("%s, %s" % (hostname, address))
-                    else:
-                        self.queue.popleft()
-                        self.queue.append(address)
+                    self.queue.popleft()
+                    self.queue.append(address)
                 return None
     
         def got_error(failure, hostname):
