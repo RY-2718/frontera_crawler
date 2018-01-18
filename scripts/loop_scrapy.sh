@@ -19,7 +19,7 @@ cat scrapy_log/scrapy.log | grep -a Crawled | tail -1 >> "log/last-crawled.log"
 num=`ls urls/urls.log.* 2>/dev/null | wc -l`
 if [ $num -ne 0 ]; then
     echo "mv urls/urls.log.* to urls/archive/"
-    cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/....-..-.. ..:..:..,... \([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
+    cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/\([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
     gzip urls/urls.log.*
     mv urls/*.gz urls/archive/
 fi
@@ -46,7 +46,7 @@ do
     num=`ls urls/urls.log.* 2>/dev/null | wc -l`
     if [ $num -ne 0 ]; then
         echo "mv urls/urls.log.* to urls/archive/"
-        cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/....-..-.. ..:..:..,... \([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
+        cat urls/urls.log.* | sed -e "s/http:\/\///" -e "s/https:\/\///" | sed -e "s/\([a-z0-9.-]*\).*/\1/" >> urls/for_making_list.txt
         gzip urls/urls.log.*
         mv urls/*.gz urls/archive/
     fi
