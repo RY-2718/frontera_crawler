@@ -65,5 +65,4 @@ $ hbase shell
 ```
 
 ### TODO
-- `crawler/pipelines.py` の削除
 - S3 bucketを `crawler/settings.py` で指定できるようにする
