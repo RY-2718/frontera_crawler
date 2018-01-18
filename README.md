@@ -1,5 +1,5 @@
 # Scrapy On Frontera
-Scrapy + Fronteraを用いてクローリングするspiderです．
+Scrapy + Fronteraを用いてクローリングするプロジェクトです．
 
 ## 依存
 - [Scrapy](https://github.com/scrapy/scrapy)
