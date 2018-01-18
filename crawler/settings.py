@@ -36,6 +36,10 @@ DOWNLOADER_MIDDLEWARES.update({
     'frontera.contrib.scrapy.middlewares.schedulers.SchedulerDownloaderMiddleware': 1000,
 })
 
+ITEM_PIPELINES = {
+    'crawler.pipelines.S3Pipeline': 800,
+}
+
 SCHEDULER = 'frontera.contrib.scrapy.schedulers.frontier.FronteraScheduler'
 
 HTTPCACHE_ENABLED = False

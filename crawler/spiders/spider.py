@@ -1,16 +1,16 @@
-from scrapy.spiders import Spider
+import cgi
+import chardet
+import logging
+import os
+import re
+import urllib
+from crawler.items import TestItem
+from crawler.blacklist import blacklist
+from scrapy import signals
 from scrapy.http import Request
 from scrapy.http.response.html import HtmlResponse
 from scrapy.linkextractors import LinkExtractor
-from scrapy import signals
-from crawler.items import TestItem
-import urllib
-import os
-import re
-import logging
-from crawler.blacklist import blacklist
-import chardet
-import cgi
+from scrapy.spiders import Spider
 from six.moves.urllib.parse import urlparse
 
 logging.config.fileConfig(fname="logging.conf", disable_existing_loggers=False)

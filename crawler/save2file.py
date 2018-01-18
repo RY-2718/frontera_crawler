@@ -1,7 +1,7 @@
-from datetime import datetime
-import hashlib
 import boto3
+import hashlib
 import logging
+from datetime import datetime
 
 logging.config.fileConfig(fname="logging.conf", disable_existing_loggers=False)
 logger = logging.getLogger("url_logger")
@@ -28,12 +28,11 @@ def generate_filename(url):
 
     return datetime.now().strftime('%y%m%d') + "/%s_%s.html" % (domain, path_hash)
 
-def save2file(scrapy_response, outputdir):
+def save2file(scrapy_response):
     ''' 
     Save renponse html to file. 
     Parameter
      scrapy_response : Scrapy's response object.
-     outputdir(str) : File output directory name.
     Return
      Return true if success save html file. 
     '''
@@ -49,7 +48,6 @@ def save2file(scrapy_response, outputdir):
         # logging
         logger.debug(scrapy_response.url.replace('\n', '') + ", " + filename)
     except:
-        # No such file or directory: outputdir
         raise
     return True
 
