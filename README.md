@@ -34,13 +34,15 @@ SPIDER_FEED_PARTITIONS # spider(Scrapy)の数
 SPIDER_LOG_PARTITIONS # worker(Frontera)の数
 
 KAFKA_LOCATION # Kafkaを動作させるマシンの場所 e.g., 'localhost:9092'
-SPIDER_LOG_DBW_GROUP # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SPIDER_LOG_SW_GROUP # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SCORING_LOG_DBW_GROUP # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SPIDER_FEED_GROUP # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SPIDER_LOG_TOPIC # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SPIDER_FEED_TOPIC # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
-SCORING_LOG_TOPIC # ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います
+# 以下はKafkaのトピックに関する設定です．
+# ScrapyとFronteraの間で一致していればなんでも良いですが，デフォルトの名前を少し変更するくらいが妥当に思います．
+SPIDER_LOG_DBW_GROUP
+SPIDER_LOG_SW_GROUP
+SCORING_LOG_DBW_GROUP
+SPIDER_FEED_GROUP
+SPIDER_LOG_TOPIC
+SPIDER_FEED_TOPIC
+SCORING_LOG_TOPIC
 ```
 
 #### /frontier/\*\_settings.py
@@ -52,7 +54,7 @@ HBASE_QUEUE_TABLE = 'queue' # Fronteraによって作成されるテーブル名
 ```
 
 ### Kafka, HBaseの設定
-Kafkaを導入，トピック（`SPIDER_LOG_TOPIC, SPIDER_FEED_TOPIC, SCORING_LOG_TOPIC`）を作成してください．
+Kafkaを導入，トピック（上の `SPIDER_LOG_TOPIC, SPIDER_FEED_TOPIC, SCORING_LOG_TOPIC` と一致させる）を作成してください．
 
 以下にコマンド例を示します．詳しくは[kafkaのドキュメント](https://kafka.apache.org/documentation/#quickstart)を参照して下さい．
 ```
