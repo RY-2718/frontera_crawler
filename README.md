@@ -7,7 +7,7 @@ Scrapy + Fronteraを用いてクローリングするプロジェクトです．
 - [Apache Kafka](https://kafka.apache.org/)
 - [Apache HBase](https://hbase.apache.org/)
 - [Twisted Python](https://twistedmatrix.com/trac/)
-    - ちょっと編集が必要
+    - docs/twisted-change.md に従って修正して下さい
 
 ## 導入
 ### pythonでの依存パッケージの導入
