@@ -1,4 +1,5 @@
 import boto3
+import crawler.settings as settings
 import hashlib
 import logging
 from datetime import datetime
@@ -8,7 +9,7 @@ logger = logging.getLogger("url_logger")
 
 SEPARATOR = "/"
 s3 = boto3.resource('s3')
-bucket = s3.Bucket() #specify bucket name
+bucket = s3.Bucket(settings.BUCKET_NAME)
 boto3.set_stream_logger('boto3', logging.WARNING)
 
 def generate_filename(url):

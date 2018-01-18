@@ -23,6 +23,11 @@ $ pip install pip install git+https://github.com/scrapinghub/frontera.git
 scrapyの動作に関する設定は `/crawler/settings.py` に，fronteraに関する設定は `/frontier/common.py` ， `/frontier/\*\_settings.py` に記述してあります．
 最低限設定すべき項目を以下に列挙します．
 
+#### /crawler/settings.py
+```
+BUCKET_NAME # S3バケットの名前
+```
+
 #### /frontier/common.py
 ```
 SPIDER_FEED_PARTITIONS # spider(Scrapy)の数
@@ -63,6 +68,3 @@ $ /path/to/kafka/bin/kafka-topics.sh --create --topic frontier-todo --replicatio
 $ hbase shell
 > create_namespace 'crawler'
 ```
-
-### TODO
-- S3 bucketを `crawler/settings.py` で指定できるようにする
