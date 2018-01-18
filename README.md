@@ -11,7 +11,8 @@ Scrapy + Fronteraを用いてクローリングするプロジェクトです．
 
 ## 導入
 ### pythonでの依存パッケージの導入
-fronteraの導入で変なことをしているのは依存を解決しつつGitHubのmasterリポジトリを取得するためです．
+virtualenvなどで環境を切り分ける場合はよしなにやってください．
+また，fronteraの導入で変なことをしているのは依存を解決しつつGitHubのmasterリポジトリを取得するためです．
 
 ```
 $ pip install scrapy colorlog msgpack-python frontera[distributed,kafka,hbase]
@@ -20,7 +21,7 @@ $ pip install pip install git+https://github.com/scrapinghub/frontera.git
 ```
 
 ### 設定ファイルの編集
-scrapyの動作に関する設定は `/crawler/settings.py` に，fronteraに関する設定は `/frontier/common.py` ， `/frontier/\*\_settings.py` に記述してあります．
+scrapyの動作に関する設定は `/crawler/settings.py` ，fronteraに関する設定は `/frontier/common.py` ， `/frontier/\*\_settings.py` ，ロギングに関する設定は `logging.conf` に記述してあります．
 最低限設定すべき項目を以下に列挙します．
 
 #### /crawler/settings.py
@@ -69,4 +70,52 @@ $ /path/to/kafka/bin/kafka-topics.sh --create --topic frontier-todo --replicatio
 ```
 $ hbase shell
 > create_namespace 'crawler'
+```
+
+## 動かし方
+### Frontera
+Kafka + zookeeperが動いていることが前提です．
+
+ターミナルを2つ立ち上げ，fronteraの各ワーカを起動します．`run_*.sh` 内でfronteraのワーカが終了するたびに再起動するようにしています．
+
+```
+$ cd /path/to/project/root
+$ bash scripts/run_db.sh
+```
+```
+$ cd /path/to/project/root
+$ bash scripts/run_strategy.sh
+```
+
+終了時には，以下のようにfronteraを終了させます．fronteraのループを止めるスクリプトを叩くようにしています．
+```
+$ cd /path/to/project/root
+$ bash scripts/kill_frontera_loop.sh
+```
+
+### Scrapy
+fronteraの各ワーカが起動していることが前提です．
+
+#### 初回時のセットアップ
+プロジェクトルートに以下のように `partition_id.txt` を作成し， `scripts/init.sh` を実行してください．
+このときの数字がFronteraが管理するScrapyのIDになります．
+この例ではScrapyのIDは0になります．
+
+```
+$ cd /path/to/project/root
+$ echo 0 > partition_id.txt
+$ bash scripts/init.sh
+```
+
+#### Scrapyの起動手順
+Scrapyの数だけターミナルを立ち上げ，Scrapyを起動します．fronteraと同様，シェルスクリプト内でScrapyが終了するたびに再起動するようにしています．
+```
+$ cd /path/to/project/root
+$ bash scripts/loop_scrapy.sh
+```
+
+Scrapyのログは `scrapy_log/scrapy.log` に吐き出されます．pythonのloggingモジュールによってローテーションがかかることがあるので，監視する場合は `tail -F` を使うと良いと思います．
+
+```
+$ tail -F ~/workspace/frontera7/japanese_company_spider[0,1]/scrapy_log/scrapy.log
 ```
